@@ -1,0 +1,19 @@
+:root {
+	--pages-column-gap: 2mm;
+	--pages-row-gap: 5mm;
+}
+
+.pagedjs_first_page {
+	margin-left: 0
+}
+
+.pagedjs_pages {
+	width: auto;
+	max-width: calc((var(--pagedjs-width) * 2) + var(--pages-column-gap));
+	column-gap: var(--pages-column-gap);
+	justify-content: center;
+}
+
+.pagedjs_page {
+	margin-top: var(--pages-row-gap);
+}
