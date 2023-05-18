@@ -4,12 +4,12 @@
 }
 
 .pagedjs_first_page {
-	margin-left: 0
+	margin-left: 0;
 }
 
 .pagedjs_pages {
 	width: auto;
-	max-width: calc((var(--pagedjs-width) * 2) + var(--pages-column-gap));
+	max-width: calc((var(--pagedjs-width) * 2) + (var(--pages-column-gap) * 2));
 	column-gap: var(--pages-column-gap);
 	justify-content: center;
 }
