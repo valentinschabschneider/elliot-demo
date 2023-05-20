@@ -1,5 +1,41 @@
 <html>
 	<head>
+		<script type="importmap">
+			{
+				"imports": {
+					"vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+				}
+			}
+		</script>
+
+		<script type="module">
+			import { createApp } from "vue";
+
+			const app = createApp({
+				data() {
+					return {
+						buttonText: "Generate PDF",
+						generatedPDFURL: null,
+					};
+				},
+				methods: {
+					generate() {
+						this.buttonText = "Generating PDF...";
+						this.generatedPDFURL = null;
+						fetch(
+							"https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
+						).then((response) => {
+							this.buttonText = "Generate again";
+							this.generatedPDFURL = response.url;
+							// window.open(response.url, "_blank");
+						});
+					},
+				},
+			});
+
+			app.mount("#app");
+		</script>
+
 		<style>
 			table {
 				border-collapse: collapse;
@@ -11,49 +47,62 @@
 		</style>
 	</head>
 	<body>
-		<table>
-			<tr>
-				<td>Short</td>
-				<td>
-					<a href="https://elliot-demo.pages.dev/short" target="_blank"
-						>Input</a
-					>
-				</td>
-				<td>
-					<a
-						href="https://elliot.up.railway.app/print/html/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
-						target="_blank"
-						>Preview</a
-					>
-				</td>
-				<td>
-					<a
-						href="https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
-						target="_blank"
-						>PDF</a
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>Long</td>
-				<td>
-					<a href="https://elliot-demo.pages.dev/long" target="_blank">Input</a>
-				</td>
-				<td>
-					<a
-						href="https://elliot.up.railway.app/print/html/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9sb25nIiwiZG93bmxvYWQiOmZhbHNlLCJpbmplY3RQb2x5ZmlsbCI6ZmFsc2V9.5V4us3QXMy0XXJc6bKf2DMATOleZOOALz-F9O3argZI"
-						target="_blank"
-						>Preview</a
-					>
-				</td>
-				<td>
-					<a
-						href="https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9sb25nIiwiZG93bmxvYWQiOmZhbHNlLCJpbmplY3RQb2x5ZmlsbCI6ZmFsc2V9.5V4us3QXMy0XXJc6bKf2DMATOleZOOALz-F9O3argZI"
-						target="_blank"
-						>PDF</a
-					>
-				</td>
-			</tr>
-		</table>
+		<div id="app">
+			<table>
+				<tr>
+					<td>Short</td>
+					<td>
+						<a href="https://elliot-demo.pages.dev/short" target="_blank"
+							>Input</a
+						>
+					</td>
+					<td>
+						<a
+							href="https://elliot.up.railway.app/print/html/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
+							target="_blank"
+							>Preview</a
+						>
+					</td>
+					<td>
+						<a
+							href="https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
+							target="_blank"
+							>PDF</a
+						>
+					</td>
+					<td>
+						<button @click="generate()">{{ buttonText }}</button>
+						<a
+							v-if="generatedPDFURL !== null"
+							:href="generatedPDFURL"
+							target="_blank"
+							>view</a
+						>
+					</td>
+				</tr>
+				<tr>
+					<td>Long</td>
+					<td>
+						<a href="https://elliot-demo.pages.dev/long" target="_blank"
+							>Input</a
+						>
+					</td>
+					<td>
+						<a
+							href="https://elliot.up.railway.app/print/html/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9sb25nIiwiZG93bmxvYWQiOmZhbHNlLCJpbmplY3RQb2x5ZmlsbCI6ZmFsc2V9.5V4us3QXMy0XXJc6bKf2DMATOleZOOALz-F9O3argZI"
+							target="_blank"
+							>Preview</a
+						>
+					</td>
+					<td>
+						<a
+							href="https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9sb25nIiwiZG93bmxvYWQiOmZhbHNlLCJpbmplY3RQb2x5ZmlsbCI6ZmFsc2V9.5V4us3QXMy0XXJc6bKf2DMATOleZOOALz-F9O3argZI"
+							target="_blank"
+							>PDF</a
+						>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</body>
 </html>
