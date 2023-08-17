@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC>
+<html lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<title>Auroræ: Their Characters and Spectra.</title>
+		<meta name="author" content="J. Rand Capron" />
+		<meta name="subject" content="Project Gutenberg eBook" />
+
+		<link href="test.css" rel="stylesheet" type="text/css" />
+
+		<script>
+			function testinger() {
+				const targetProperty = "break-inside";
+				const targetValue = "avoid";
+
+				const allElements = document.querySelectorAll("tbody");
+
+				// Create an array to store matching elements
+				const matchingElements = [];
+
+				console.log(allElements);
+
+				// Loop through all elements and check their computed styles
+				allElements.forEach((element) => {
+					const styles = getComputedStyle(element);
+					console.log(element, styles.getPropertyValue(targetProperty));
+					// Check if the property matches the desired value
+					if (styles.getPropertyValue(targetProperty) === targetValue) {
+						matchingElements.push(element);
+					}
+				});
+
+				console.log(matchingElements);
+
+				matchingElements.forEach((tbody) => {
+					const trs = Array.from(tbody.getElementsByTagName("tr"));
+
+					console.log(trs);
+
+					trs.forEach((tr) => {
+						console.log("yooooo");
+
+						// Create a new node (container) to replace the moved element
+						const newNode = document.createElement("tbody");
+
+						console.log(newNode);
+						console.log(tbody);
+						console.log(tr);
+
+						// Append the element to the new node
+
+						// Replace the original element with the new node
+						// parentElement.replaceChild(newNode, tr);
+						newNode.appendChild(tr);
+						tbody.parentNode.insertBefore(newNode, tbody);
+					});
+
+					tbody.remove();
+				});
+			}
+
+			window.PagedConfig = {
+				...window.PagedConfig,
+				before: () => {
+					return new Promise((resolve, reject) => {
+						testinger();
+
+						resolve();
+					});
+				},
+			};
+		</script>
+
+		<script src="https://elliot.up.railway.app/static/pagedjs/browser.js"></script>
+		<script src="https://elliot.up.railway.app/static/handler/relative-to-absolute-static-files-handler.js"></script>
+
+		<link
+			rel="stylesheet"
+			href="https://elliot.up.railway.app/static/preview.css"
+			media="screen"
+		/>
+		<link rel="stylesheet" href="preview.css" media="screen" />
+
+		<!-- Typos -->
+		<link rel="stylesheet" href="fonts/spectral/stylesheet.css" />
+		<link rel="stylesheet" href="fonts/daubenton/stylesheet.css" />
+
+		<!-- <script src="test.js"></script> -->
+		<!-- <script src="repeat-table-header.js"></script> -->
+	</head>
+	<body>
+		<section>
+			<table>
+				<thead>
+					<tr>
+						<td>lkasjdf</td>
+						<td>dfsfsf</td>
+						<td>ffff</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>21</td>
+						<td>22</td>
+						<td>23</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>31</td>
+						<td>32</td>
+						<td>33</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>51</td>
+						<td>52<br />lets<br />go<br />bro</td>
+						<td>53</td>
+					</tr>
+					<tr>
+						<td>777<br />hmm<br />plz</td>
+						<td>666</td>
+						<td>555</td>
+					</tr>
+					<tr>
+						<td>
+							61 kl sdfkl sdflkj sdfkljs dfklj sdflkjsd flkkjs dflkj sdfk sdfkj
+							sdf kjl l kads flkasdflk asd lkads flka asd lfkjasdfk j
+						</td>
+						<td>62</td>
+						<td>63</td>
+					</tr>
+					<tr>
+						<td>
+							71 kkkkkkkkkkkkkkkkks kl sdfkl sdflkj sdfkljs dfklj sdflkjsd
+							flkkjs dflkj sdfk sdfkj sdf kjl
+						</td>
+						<td>72</td>
+						<td>73</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>41</td>
+						<td>42</td>
+						<td>43</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>12</td>
+						<td>13</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<script>
+			// testinger();
+		</script>
+	</body>
+</html>
