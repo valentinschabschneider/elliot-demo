@@ -1,40 +1,9 @@
 <html>
 	<head>
-		<script type="importmap">
-			{
-				"imports": {
-					"vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-				}
-			}
-		</script>
-
-		<script type="module">
-			import { createApp } from "vue";
-
-			const app = createApp({
-				data() {
-					return {
-						buttonText: "Generate PDF",
-						generatedPDFURL: null,
-					};
-				},
-				methods: {
-					generate() {
-						this.buttonText = "Generating PDF...";
-						this.generatedPDFURL = null;
-						fetch(
-							"https://elliot.up.railway.app/print/pdf/now/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwczovL2VsbGlvdC1kZW1vLnBhZ2VzLmRldi9zaG9ydCIsImRvd25sb2FkIjpmYWxzZSwiaW5qZWN0UG9seWZpbGwiOmZhbHNlfQ.wy69ZiUdaF3QMY8a73XTEZgA_whq_1kYfjNdetOJS68"
-						).then((response) => {
-							this.buttonText = "Generate again";
-							this.generatedPDFURL = response.url;
-							// window.open(response.url, "_blank");
-						});
-					},
-				},
-			});
-
-			app.mount("#app");
-		</script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+		></script>
 
 		<style>
 			table {
@@ -58,26 +27,74 @@
 					</td>
 					<td>
 						<a
-							href="https://elliot-demo.valentin-schabschneider.workers.dev/short?outputType=html"
+							href="https://elliot-demo.valentin-schabschneider.workers.dev/print/now?outputType=html&page=short"
 							target="_blank"
 							>Preview</a
 						>
 					</td>
 					<td>
 						<a
-							href="https://elliot-demo.valentin-schabschneider.workers.dev/short?outputType=pdf"
+							href="https://elliot-demo.valentin-schabschneider.workers.dev/print/now?outputType=pdf&page=short"
 							target="_blank"
 							>PDF</a
 						>
 					</td>
-					<td>
-						<button @click="generate()">{{ buttonText }}</button>
+					<td
+						x-data="{ page: 'short', generatedPDFURL: null, buttonText: 'Generate PDF' }"
+					>
+						<button @click="handleClick" x-text="buttonText"></button>
 						<a
-							v-if="generatedPDFURL !== null"
-							:href="generatedPDFURL"
+							x-show="generatedPDFURL !== null"
+							x-bind:href="generatedPDFURL"
 							target="_blank"
-							>view</a
 						>
+							view
+						</a>
+
+						<script>
+							async function handleClick(e) {
+								this.generatedPDFURL = null;
+								this.buttonText = "Generating PDF...";
+
+								fetch(
+									"https://elliot-demo.valentin-schabschneider.workers.dev/print/soon?outputType=pdf&page=" +
+										this.page
+								).then(async (response) => {
+									const jobId = (await response.json()).id;
+
+									console.log("jobId", jobId);
+
+									awaitFinished(jobId, (url) => {
+										this.generatedPDFURL = url;
+										this.buttonText = "Regenerate PDF...";
+									});
+								});
+							}
+
+							function awaitFinished(jobId, setGeneratedPDFURL) {
+								fetch(
+									"https://elliot-demo.valentin-schabschneider.workers.dev/jobs/" +
+										jobId
+								).then(async (response) => {
+									const state = (await response.json()).state;
+									console.log("state", state);
+
+									if (state == "completed") {
+										console.log("completed");
+
+										setGeneratedPDFURL(
+											"https://elliot-demo.valentin-schabschneider.workers.dev/jobs/" +
+												jobId +
+												"/collect"
+										);
+									} else
+										setTimeout(
+											() => awaitFinished(jobId, setGeneratedPDFURL),
+											500
+										);
+								});
+							}
+						</script>
 					</td>
 				</tr>
 				<tr>
@@ -89,14 +106,14 @@
 					</td>
 					<td>
 						<a
-							href="https://elliot-demo.valentin-schabschneider.workers.dev/long?outputType=html"
+							href="https://elliot-demo.valentin-schabschneider.workers.dev/print/now?outputType=html&page=long"
 							target="_blank"
 							>Preview</a
 						>
 					</td>
 					<td>
 						<a
-							href="https://elliot-demo.valentin-schabschneider.workers.dev/long?outputType=pdf"
+							href="https://elliot-demo.valentin-schabschneider.workers.dev/print/now?outputType=pdf&page=long"
 							target="_blank"
 							>PDF</a
 						>
