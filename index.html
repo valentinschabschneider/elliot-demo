@@ -59,16 +59,21 @@
 								fetch(
 									"https://elliot-demo.valentin-schabschneider.workers.dev/print/soon?outputType=pdf&page=" +
 										this.page
-								).then(async (response) => {
-									const jobId = (await response.json()).id;
+								)
+									.then(async (response) => {
+										const jobId = (await response.json()).id;
 
-									console.log("jobId", jobId);
+										console.log("jobId", jobId);
 
-									awaitFinished(jobId, (url) => {
-										this.generatedPDFURL = url;
-										this.buttonText = "Regenerate PDF...";
+										awaitFinished(jobId, (url) => {
+											this.generatedPDFURL = url;
+											this.buttonText = "Regenerate PDF...";
+										});
+									})
+									.catch((e) => {
+										this.customHTMLbuttonText = "Error! Try again";
+										console.error(e);
 									});
-								});
 							}
 
 							function awaitFinished(jobId, setGeneratedPDFURL) {
@@ -120,6 +125,79 @@
 					</td>
 				</tr>
 			</table>
+
+			<div
+				x-data="{ customHTMLGeneratedPDFURL: null, customHTMLbuttonText: 'Generate PDF', customHTMLInput: `<html>\n<body>\nbruh\n</body>\n</html>` }"
+			>
+				<p>Try it yourself:</p>
+
+				<textarea
+					x-model="customHTMLInput"
+					style="height: 200px; width: 100%"
+				></textarea>
+				<button
+					@click="handleCustomHTMLClick"
+					x-text="customHTMLbuttonText"
+				></button>
+				<a
+					x-show="customHTMLGeneratedPDFURL !== null"
+					x-bind:href="customHTMLGeneratedPDFURL"
+					target="_blank"
+				>
+					view
+				</a>
+
+				<script>
+					async function handleCustomHTMLClick(e) {
+						this.customHTMLGeneratedPDFURL = null;
+						this.customHTMLbuttonText = "Generating PDF...";
+						// this.customHTMLInput = null;
+
+						fetch(
+							"https://elliot-demo.valentin-schabschneider.workers.dev/print/soon?outputType=pdf",
+							{
+								method: "POST",
+								body: this.customHTMLInput,
+							}
+						)
+							.then(async (response) => {
+								const jobId = (await response.json()).id;
+
+								console.log("jobId", jobId);
+
+								awaitFinished(jobId, (url) => {
+									this.customHTMLGeneratedPDFURL = url;
+									this.customHTMLbuttonText = "Regenerate PDF...";
+								});
+							})
+							.catch((e) => {
+								this.customHTMLbuttonText = "Error! Try again";
+								console.error(e);
+							});
+					}
+
+					function awaitFinished(jobId, setGeneratedPDFURL) {
+						fetch(
+							"https://elliot-demo.valentin-schabschneider.workers.dev/jobs/" +
+								jobId
+						).then(async (response) => {
+							const state = (await response.json()).state;
+							console.log("state", state);
+
+							if (state == "completed") {
+								console.log("completed");
+
+								setGeneratedPDFURL(
+									"https://elliot-demo.valentin-schabschneider.workers.dev/jobs/" +
+										jobId +
+										"/collect"
+								);
+							} else
+								setTimeout(() => awaitFinished(jobId, setGeneratedPDFURL), 500);
+						});
+					}
+				</script>
+			</div>
 		</div>
 	</body>
 </html>
