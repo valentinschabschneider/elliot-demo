@@ -1,5 +1,34 @@
 export default {
 	async fetch(request, env) {
+		function addWatermark(htmlContent, watermarkText) {
+			// Create the watermark HTML
+			const watermarkHtml = `
+			    <div style="
+						position: fixed;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%) rotate(-45deg);
+						font-size: 100px;
+						color: rgba(0, 0, 0, 0.1);
+						pointer-events: none;
+						z-index: 9999;
+						user-select: none;
+						white-space: nowrap;
+					">
+							${watermarkText}
+					</div>
+			`;
+
+			// Insert the watermark before the closing </body> tag
+			const bodyCloseTag = "</body>";
+			if (htmlContent.includes(bodyCloseTag)) {
+				return htmlContent.replace(bodyCloseTag, watermarkHtml + bodyCloseTag);
+			} else {
+				// If the </body> tag is missing, append to the end of the file
+				return htmlContent + watermarkHtml;
+			}
+		}
+
 		const { pathname, searchParams } = new URL(request.url);
 
 		let url = env.ELLIOT_URL;
@@ -19,7 +48,7 @@ export default {
 					"&injectPolyfill=" +
 					"false";
 			} else {
-				body = await request.text();
+				body = addWatermark(await request.text(), "Elliot Demo");
 				url += "&injectPolyfill=" + "true";
 			}
 
